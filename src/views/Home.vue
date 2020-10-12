@@ -4,6 +4,8 @@
     <div v-for="recipe in recipes">
       <h2>Title: {{ recipe.title }}</h2>
       <p>Ingredients: {{ recipe.ingredients }}</p>
+      <p>Directions: {{ recipe.directions }}</p>
+      <p>Prep Time: {{ recipe.prep_time }}</p>
     </div>
   </div>
 </template>
@@ -27,6 +29,7 @@ export default {
     indexRecipes: function () {
       axios.get("/api/recipes").then(response => {
         console.log(response.data);
+        this.recipes = response.data;
       });
     }
   }
