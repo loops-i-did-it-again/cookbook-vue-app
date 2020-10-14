@@ -2,6 +2,11 @@
   <div class="home">
     <div>
       <h2>New Recipe</h2>
+      Title: <input type="text" v-model="newRecipeTitle"><br>
+      Image Url: <input type="text" v-model="newRecipeImageUrl"><br>
+      Ingredients: <input type="text" v-model="newRecipeIngredients"><br>
+      Directions: <input type="text" v-model="newRecipeDirections"><br>
+      Prep Time: <input type="text" v-model="newRecipePrepTime"><br>
       <button v-on:click="createRecipe()">Create</button>
     </div>
 
@@ -27,7 +32,12 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      recipes: []
+      recipes: [],
+      newRecipeTitle: "",
+      newRecipeImageUrl: "",
+      newRecipeIngredients: "",
+      newRecipeDirections: "",
+      newRecipePrepTime: "",
     };
   },
   created: function() {
@@ -42,11 +52,11 @@ export default {
     },
     createRecipe: function () {
       var params = {
-        title: "Example 2 Title",
-        image_url: "example 2.png",
-        ingredients: "Example 2 ingredients",
-        directions: "Example 2 directions",
-        prep_time: 10
+        title: this.newRecipeTitle,
+        image_url: this.newRecipeImageUrl,
+        ingredients: this.newRecipeIngredients,
+        directions: this.newRecipeDirections,
+        prep_time: this.newRecipePrepTime
       };
 
       axios.post("/api/recipes", params).then(response => {
