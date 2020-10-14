@@ -22,11 +22,13 @@
     <dialog id="recipe-details">
       <form method="dialog">
         <h2>Recipe Info</h2>
-        <p>Title: {{ currentRecipe.title }}</p>
-        <img :src="currentRecipe.image_url" alt="">
-        <p>Ingredients: {{ currentRecipe.ingredients }}</p>
-        <p>Directions: {{ currentRecipe.directions }}</p>
-        <p>Prep Time: {{ currentRecipe.prep_time }}</p>
+        {{ currentRecipe }}
+        <p>Title: <input type="text" v-model="currentRecipe.title"></p>
+        <p>Image Url: <input type="text" v-model="currentRecipe.image_url"></p>
+        <p>Ingredients: <input type="text" v-model="currentRecipe.ingredients"></p>
+        <p>Directions: <input type="text" v-model="currentRecipe.directions"></p>
+        <p>Prep Time: <input type="text" v-model="currentRecipe.prep_time"></p>
+        <button v-on:click="updateRecipe(currentRecipe)">Update Recipe</button>
         <button>Close</button>
       </form>
     </dialog>
@@ -87,6 +89,21 @@ export default {
       console.log(recipe.title);
       this.currentRecipe = recipe;
       document.querySelector("#recipe-details").showModal();
+    },
+    updateRecipe: function (recipe) {
+      var params = {
+        title: recipe.title,
+        image_url: recipe.image_url,
+        ingredients: recipe.ingredients,
+        directions: recipe.directions,
+        prep_time: recipe.prep_time
+      };
+
+      axios.patch(`/api/recipes/${recipe.id}`, params).then(response => {
+        console.log("Success", response.data);
+      }).catch(error => {
+        console.log(error.response.data.errors);
+      });
     }
   }
 };
