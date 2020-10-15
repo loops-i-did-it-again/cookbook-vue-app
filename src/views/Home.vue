@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+
     <div>
       <h2>New Recipe</h2>
       <ul>
@@ -36,7 +37,6 @@
         <button>Close</button>
       </form>
     </dialog>
-
 
   </div>
 </template>
