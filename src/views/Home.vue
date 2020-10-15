@@ -2,6 +2,9 @@
   <div class="home">
     <div>
       <h2>New Recipe</h2>
+      <ul>
+        <li v-for="error in errors">{{ error }}</li>
+      </ul>
       Title: <input type="text" v-model="newRecipeTitle"><br>
       Image Url: <input type="text" v-model="newRecipeImageUrl"><br>
       Ingredients: <input type="text" v-model="newRecipeIngredients"><br>
@@ -56,7 +59,8 @@ export default {
       newRecipeIngredients: "",
       newRecipeDirections: "",
       newRecipePrepTime: "",
-      currentRecipe: {}
+      currentRecipe: {},
+      errors: []
     };
   },
   created: function() {
@@ -81,13 +85,19 @@ export default {
       axios.post("/api/recipes", params).then(response => {
         console.log("Success", response.data);
         this.recipes.push(response.data);
+        this.newRecipeTitle = "";
+        this.newRecipeImageUrl = "";
+        this.newRecipeIngredients = "";
+        this.newRecipeDirections = "";
+        this.newRecipePrepTime = "";
       })
       .catch(error => {
         console.log(error.response.data.errors);
+        this.errors = error.response.data.errors;
       });
     },
     showRecipe: function (recipe) {
-      console.log(recipe.title);
+      console.log(recipe);
       this.currentRecipe = recipe;
       document.querySelector("#recipe-details").showModal();
     },
