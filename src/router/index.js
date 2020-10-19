@@ -5,6 +5,7 @@ import Test from '../views/Test.vue';
 import Signup from "../views/Signup.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
+import RecipesIndex from "../views/RecipesIndex.vue";
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/logout',
     name: 'logout',
     component: Logout
+  },
+  {
+    path: '/recipes',
+    name: 'recipes-index',
+    component: RecipesIndex
   }
 ]
 
