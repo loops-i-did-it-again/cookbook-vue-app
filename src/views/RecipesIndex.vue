@@ -1,15 +1,19 @@
 <template>
   <div class="recipes-index">
-    <h2>All Recipes</h2>
 
-    <div v-for="recipe in recipes">
-      <h2>Title: {{ recipe.title }}</h2>
-      <img :src="recipe.image_url" alt="">
-      <p>Ingredients: {{ recipe.ingredients }}</p>
-      <p>Directions: {{ recipe.directions }}</p>
-      <p>Prep Time: {{ recipe.prep_time }}</p>
-      <router-link :to="`/recipes/${recipe.id}`">More Info</router-link>
+    <div class="card-columns">
+      <div class="card" v-for="recipe in recipes">
+        <router-link :to="`/recipes/${recipe.id}`">
+          <img :src="recipe.image_url" class="card-img-top" alt="">
+        </router-link>
+        <div class="card-body">
+          <h5 class="card-title">{{ recipe.title }}</h5>
+          <p class="card-text">Prep Time: {{ recipe.prep_time }}</p>
+          <p class="card-text"><small class="text-muted">Created {{ recipe.created_at }}</small></p>
+        </div>
+      </div>
     </div>
+
   </div>
 </template>
 

@@ -25,9 +25,9 @@
         <label>Prep Time:</label>
         <input type="number" class="form-control" v-model="recipe.prep_time">
       </div>
-      <input type="submit" class="btn btn-primary" value="Update">
+      <input type="submit" class="btn btn-warning" value="Update">
     </form>
-    <button v-on:click="destroyRecipe()">Delete</button>
+    <button class="btn btn-danger" v-on:click="destroyRecipe()">Delete</button>
   </div>
 </template>
 
