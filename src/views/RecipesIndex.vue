@@ -8,7 +8,7 @@
       <p>Ingredients: {{ recipe.ingredients }}</p>
       <p>Directions: {{ recipe.directions }}</p>
       <p>Prep Time: {{ recipe.prep_time }}</p>
-      <button>More Info</button>
+      <router-link :to="`/recipes/${recipe.id}`">More Info</router-link>
     </div>
   </div>
 </template>
