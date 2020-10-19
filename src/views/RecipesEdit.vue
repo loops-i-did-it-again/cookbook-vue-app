@@ -27,6 +27,7 @@
       </div>
       <input type="submit" class="btn btn-primary" value="Update">
     </form>
+    <button v-on:click="destroyRecipe()">Delete</button>
   </div>
 </template>
 
@@ -64,6 +65,14 @@ export default {
         .catch(error => {
           this.errors = error.response.data.errors;
         });
+    },
+    destroyRecipe: function() {
+      if(confirm("Are you sure you want to delete this recipe?")) {
+        axios.delete(`/api/recipes/${this.recipe.id}`).then(response => {
+          console.log("Success", response.data);
+          this.$router.push("/recipes");
+        });
+      }
     }
   }
 };
