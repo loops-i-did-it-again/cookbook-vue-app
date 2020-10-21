@@ -1,6 +1,8 @@
 <template>
   <div class="recipes-show">
 
+    <p v-if="$parent.isLoggedIn()">I can be seen when a user is logged in</p>
+
     <h2>Title: {{ recipe.title }}</h2>
     <img :src="recipe.image_url" alt="">
     <p>Ingredients: {{ recipe.ingredients }}</p>
