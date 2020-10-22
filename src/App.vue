@@ -36,6 +36,14 @@
           <li class="nav-item" v-if="isLoggedIn()">
             <router-link class="nav-link" to="/logout">Logout</router-link>
           </li>
+          <div class="form-inline my-2 my-lg-0">
+            <input
+              class="form-control mr-sm-2"
+              type="text"
+              placeholder="Search"
+              v-model="titleFilter"
+            />
+          </div>
         </ul>
       </div>
     </nav>
@@ -66,6 +74,7 @@ export default {
   data: function() {
     return {
       flashMessage: "",
+      titleFilter: "",
     };
   },
   methods: {
