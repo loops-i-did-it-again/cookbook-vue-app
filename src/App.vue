@@ -48,7 +48,7 @@
       <button
         type="button"
         class="close"
-        data-dismiss="alert"
+        v-on:click="flashMessage = ''"
         aria-label="Close"
       >
         <span aria-hidden="true">&times;</span>
