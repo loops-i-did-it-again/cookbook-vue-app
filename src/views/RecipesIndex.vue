@@ -1,10 +1,29 @@
 <template>
   <div class="recipes-index">
-    <div>Search by title: <input type="text" v-model="titleFilter" /></div>
+    <div>
+      <input
+        class="form-control"
+        type="text"
+        v-model="titleFilter"
+        placeholder="Search by title"
+      />
+      <button v-on:click="setSortAttribute('title')" class="btn btn-success">
+        Sort by title
+      </button>
+      <button
+        v-on:click="setSortAttribute('prep_time')"
+        class="btn btn-success"
+      >
+        Sort by prep time
+      </button>
+    </div>
     <div class="card-columns">
       <div
         class="card"
-        v-for="recipe in filterBy(recipes, titleFilter, 'title', 'ingredients')"
+        v-for="recipe in orderBy(
+          filterBy(recipes, titleFilter, 'title'),
+          sortAttribute
+        )"
       >
         <router-link :to="`/recipes/${recipe.id}`">
           <img :src="recipe.image_url" class="card-img-top" alt="" />
@@ -34,6 +53,7 @@ export default {
     return {
       recipes: [],
       titleFilter: "",
+      sortAttribute: "title",
     };
   },
   created: function() {
@@ -45,6 +65,9 @@ export default {
   methods: {
     relativeDate: function(date) {
       return moment(date).fromNow();
+    },
+    setSortAttribute: function(attribute) {
+      this.sortAttribute = attribute;
     },
   },
 };
