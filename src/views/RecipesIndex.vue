@@ -9,7 +9,9 @@
           <h5 class="card-title">{{ recipe.title }}</h5>
           <p class="card-text">Prep Time: {{ recipe.prep_time }}</p>
           <p class="card-text">
-            <small class="text-muted">Created {{ recipe.created_at }}</small>
+            <small class="text-muted"
+              >Created {{ relativeDate(recipe.created_at) }}</small
+            >
           </p>
         </div>
       </div>
@@ -19,6 +21,7 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
 
 export default {
   data: function() {
@@ -32,6 +35,10 @@ export default {
       this.recipes = response.data;
     });
   },
-  methods: {},
+  methods: {
+    relativeDate: function(date) {
+      return moment(date).fromNow();
+    },
+  },
 };
 </script>
