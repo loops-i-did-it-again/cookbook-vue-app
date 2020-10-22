@@ -10,7 +10,7 @@
     <p>Prep Time: {{ recipe.prep_time }}</p>
     <p>Created by: {{ recipe.user.name }} </p>
 
-    <router-link v-if="recipe.user.id == $parent.getUserId()" :to="`/recipes/${recipe.id}/edit`">Edit</router-link>
+    <router-link v-if="recipe.user.id === $parent.getUserId()" :to="`/recipes/${recipe.id}/edit`">Edit</router-link>
 
     <p>{{ typeof($parent.getUserId()) }}</p>
     <p>{{ typeof(recipe.user.id) }}</p>

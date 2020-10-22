@@ -49,7 +49,7 @@ export default {
       return localStorage.getItem("jwt");
     },
     getUserId: function() {
-      return localStorage.getItem("user_id");
+      return parseInt(localStorage.getItem("user_id"));
     }
   }
 };
