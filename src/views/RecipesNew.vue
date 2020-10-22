@@ -56,6 +56,7 @@ export default {
       axios
         .post("/api/recipes", params)
         .then(response => {
+          this.$parent.flashMessage = "Recipe successfully created!"
           this.$router.push("/recipes");
         })
         .catch(error => {
