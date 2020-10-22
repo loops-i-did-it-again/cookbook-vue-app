@@ -1,14 +1,10 @@
 <template>
   <div class="recipes-index">
+    <div>Search by title: <input type="text" v-model="titleFilter" /></div>
     <div class="card-columns">
       <div
         class="card"
-        v-for="recipe in filterBy(
-          recipes,
-          $parent.titleFilter,
-          'title',
-          'ingredients'
-        )"
+        v-for="recipe in filterBy(recipes, titleFilter, 'title', 'ingredients')"
       >
         <router-link :to="`/recipes/${recipe.id}`">
           <img :src="recipe.image_url" class="card-img-top" alt="" />
@@ -37,6 +33,7 @@ export default {
   data: function() {
     return {
       recipes: [],
+      titleFilter: "",
     };
   },
   created: function() {
