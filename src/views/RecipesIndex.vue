@@ -1,13 +1,20 @@
 <template>
   <div class="recipes-index">
-    <div>
+    <div class="row mb-3 mt-3">
       <input
-        class="form-control"
+        class="form-control col-7 mr-2"
         type="text"
         v-model="titleFilter"
         placeholder="Search by title"
+        list="titles"
       />
-      <button v-on:click="setSortAttribute('title')" class="btn btn-success">
+      <datalist id="titles">
+        <option v-for="recipe in recipes">{{ recipe.title }}</option>
+      </datalist>
+      <button
+        v-on:click="setSortAttribute('title')"
+        class="btn btn-success mr-2"
+      >
         Sort by title
       </button>
       <button
@@ -17,25 +24,27 @@
         Sort by prep time
       </button>
     </div>
-    <div class="card-columns">
+    <div class="card-deck">
       <div
-        class="card"
+        class="col-4 mb-3"
         v-for="recipe in orderBy(
           filterBy(recipes, titleFilter, 'title'),
           sortAttribute
         )"
       >
-        <router-link :to="`/recipes/${recipe.id}`">
-          <img :src="recipe.image_url" class="card-img-top" alt="" />
-        </router-link>
-        <div class="card-body">
-          <h5 class="card-title">{{ recipe.title }}</h5>
-          <p class="card-text">Prep Time: {{ recipe.prep_time }}</p>
-          <p class="card-text">
-            <small class="text-muted"
-              >Created {{ relativeDate(recipe.created_at) }}</small
-            >
-          </p>
+        <div class="card">
+          <router-link :to="`/recipes/${recipe.id}`">
+            <img :src="recipe.image_url" class="card-img-top" alt="" />
+          </router-link>
+          <div class="card-body">
+            <h5 class="card-title">{{ recipe.title }}</h5>
+            <p class="card-text">Prep Time: {{ recipe.prep_time }}</p>
+            <p class="card-text">
+              <small class="text-muted"
+                >Created {{ relativeDate(recipe.created_at) }}</small
+              >
+            </p>
+          </div>
         </div>
       </div>
     </div>
