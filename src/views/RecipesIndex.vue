@@ -24,26 +24,42 @@
         Sort by prep time
       </button>
     </div>
-    <div class="card-deck">
-      <div
-        class="col-4 mb-3"
-        v-for="recipe in orderBy(
-          filterBy(recipes, titleFilter, 'title'),
-          sortAttribute
-        )"
-      >
-        <div class="card">
-          <router-link :to="`/recipes/${recipe.id}`">
-            <img :src="recipe.image_url" class="card-img-top" alt="" />
-          </router-link>
-          <div class="card-body">
-            <h5 class="card-title">{{ recipe.title }}</h5>
-            <p class="card-text">Prep Time: {{ recipe.prep_time }}</p>
-            <p class="card-text">
-              <small class="text-muted"
-                >Created {{ relativeDate(recipe.created_at) }}</small
-              >
+
+    <div id="fh5co-work-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+            <h2>All Recipes</h2>
+            <p>
+              Filter, sort, and browse you favorite recipes.
             </p>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="col-md-4"
+            v-for="recipe in orderBy(
+              filterBy(recipes, titleFilter, 'title'),
+              sortAttribute
+            )"
+          >
+            <router-link
+              :to="`/recipes/${recipe.id}`"
+              class="item-grid text-center"
+            >
+              <div
+                class="image"
+                :style="`background-image: url(${recipe.image_url})`"
+              ></div>
+              <div class="v-align">
+                <div class="v-align-middle">
+                  <h3 class="title">{{ recipe.title }}</h3>
+                  <h5 class="category">
+                    Created {{ relativeDate(recipe.created_at) }}
+                  </h5>
+                </div>
+              </div>
+            </router-link>
           </div>
         </div>
       </div>
