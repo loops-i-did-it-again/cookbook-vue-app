@@ -4,7 +4,7 @@ import router from './router'
 import axios from "axios"
 
 axios.defaults.baseURL =
-  process.env.NODE_ENV === "development" ? "https://lidia-cookbook.herokuapp.com/" : "/";
+  process.env.NODE_ENV === "production" ? "https://lidia-cookbook.herokuapp.com/" : "/";
 
 var jwt = localStorage.getItem("jwt");
 if (jwt) {
