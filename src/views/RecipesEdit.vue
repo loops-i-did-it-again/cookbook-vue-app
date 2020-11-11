@@ -1,32 +1,5 @@
 <template>
   <div class="recipes-edit">
-    <form v-on:submit.prevent="updateRecipe()">
-      <h1>Edit Recipe</h1>
-      <ul>
-        <li class="text-danger" v-for="error in errors">{{ error }}</li>
-      </ul>
-      <div class="form-group">
-        <label>Title:</label> 
-        <input type="text" class="form-control" v-model="recipe.title">
-      </div>
-      <div class="form-group">
-        <label>Ingredients:</label>
-        <input type="text" class="form-control" v-model="recipe.ingredients">
-      </div>
-      <div class="form-group">
-        <label>Directions:</label>
-        <input type="text" class="form-control" v-model="recipe.directions">
-      </div>
-      <div class="form-group">
-        <label>Image Url:</label>
-        <input type="text" class="form-control" v-model="recipe.image_url">
-      </div>
-      <div class="form-group">
-        <label>Prep Time:</label>
-        <input type="number" class="form-control" v-model="recipe.prep_time">
-      </div>
-      <input type="submit" class="btn btn-warning" value="Update">
-    </form>
     <button class="btn btn-danger" v-on:click="destroyRecipe()">Delete</button>
   </div>
 </template>
@@ -38,15 +11,14 @@ export default {
   data: function() {
     return {
       recipe: {},
-      errors: []
+      errors: [],
     };
   },
   created: function() {
-    axios
-      .get(`/api/recipes/${this.$route.params.id}`).then(response => {
-        console.log(response.data);
-        this.recipe = response.data;
-      });
+    axios.get(`/api/recipes/${this.$route.params.id}`).then((response) => {
+      console.log(response.data);
+      this.recipe = response.data;
+    });
   },
   methods: {
     updateRecipe: function() {
@@ -55,25 +27,25 @@ export default {
         ingredients: this.recipe.ingredients,
         directions: this.recipe.directions,
         image_url: this.recipe.image_url,
-        prep_time: this.recipe.prep_time
+        prep_time: this.recipe.prep_time,
       };
       axios
         .patch(`/api/recipes/${this.recipe.id}`, params)
-        .then(response => {
+        .then((response) => {
           this.$router.push(`/recipes/${this.recipe.id}`);
         })
-        .catch(error => {
+        .catch((error) => {
           this.errors = error.response.data.errors;
         });
     },
     destroyRecipe: function() {
-      if(confirm("Are you sure you want to delete this recipe?")) {
-        axios.delete(`/api/recipes/${this.recipe.id}`).then(response => {
+      if (confirm("Are you sure you want to delete this recipe?")) {
+        axios.delete(`/api/recipes/${this.recipe.id}`).then((response) => {
           console.log("Success", response.data);
           this.$router.push("/recipes");
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
