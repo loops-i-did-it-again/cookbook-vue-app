@@ -15,7 +15,7 @@
       type="button"
       class="btn btn-primary"
       data-toggle="modal"
-      data-target="#editRecipeModal"
+      data-target="#editRqecipeModal"
     >
       Edit Recipe
     </button>
